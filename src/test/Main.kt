@@ -15,7 +15,7 @@ import org.http4k.template.*
 
 fun main() {
     val filters = PrintRequestAndResponse().then(CatchAll())
-    filters.then(newGameApp(Game())).asServer(ApacheServer(port = 1234)).start()
+    filters.then(newGameBackend(Game())).asServer(ApacheServer(port = 1234)).start()
 
     val gameAppClient = OkHttp().with(SetBaseUriFrom(Uri.of("http://localhost:1234")))
     newGameFrontend(gameAppClient).asServer(ApacheServer(port = 8080)).start()
@@ -56,7 +56,7 @@ fun newGameFrontend(gameApp: HttpHandler): HttpHandler {
     )
 }
 
-fun newGameApp(initialGame: Game): HttpHandler {
+fun newGameBackend(initialGame: Game): HttpHandler {
     var game = initialGame
     return routes(
         "/game" bind GET to {

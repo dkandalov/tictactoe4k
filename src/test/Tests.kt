@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.*
 
 @ExtendWith(ApprovalTest::class)
 class GameFrontendTests {
-    private val frontend = newGameFrontend(newGameApp(Game().move(1, 1)))
+    private val frontend = newGameFrontend(newGameBackend(Game().move(1, 1)))
         .with(FollowRedirects())
 
     @Test fun `get game state`(approver: Approver) {
@@ -28,18 +28,18 @@ class GameFrontendTests {
 }
 
 class GameAppTests {
-    private val gameApp = newGameApp(Game())
+    private val backend = newGameBackend(Game())
 
     @Test fun `get game state`() {
-        val response = gameApp(Request(GET, "/game")).expectOK()
+        val response = backend(Request(GET, "/game")).expectOK()
         response.bodyString() shouldEqual "{\"moves\":[],\"winner\":null}"
     }
 
     @Test fun `players make moves`() {
-        gameApp(Request(PUT, "/game?x=0&y=1")).expectOK()
-        gameApp(Request(PUT, "/game?x=2&y=0")).expectOK()
+        backend(Request(PUT, "/game?x=0&y=1")).expectOK()
+        backend(Request(PUT, "/game?x=2&y=0")).expectOK()
 
-        val response = gameApp(Request(GET, "/game")).expectOK()
+        val response = backend(Request(GET, "/game")).expectOK()
         gameLens(response) shouldEqual Game(moves = listOf(
             Move(0, 1, X),
             Move(2, 0, O)
