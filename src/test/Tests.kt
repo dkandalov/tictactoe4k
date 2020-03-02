@@ -11,8 +11,7 @@ import org.junit.jupiter.api.extension.*
 
 @ExtendWith(ApprovalTest::class)
 class GameFrontendTests {
-    private val frontend = newGameFrontend(newGameBackend(Game().move(1, 1)))
-        .with(FollowRedirects())
+    private val frontend = newGameFrontend(newGameBackend(Game().move(1, 1))).with(FollowRedirects())
 
     @Test fun `get game state`(approver: Approver) {
         val response = frontend(Request(GET, "/")).expectOK()
@@ -23,6 +22,11 @@ class GameFrontendTests {
         frontend(Request(GET, "/move/0/1")).expectOK()
         frontend(Request(GET, "/move/2/0")).expectOK()
 
+        approver.assertApproved(frontend(Request(GET, "/")).expectOK())
+    }
+
+    @Test fun `player X wins`(approver: Approver) {
+        val frontend = newGameFrontend(newGameBackend(finishedGame))
         approver.assertApproved(frontend(Request(GET, "/")).expectOK())
     }
 }
@@ -45,11 +49,32 @@ class GameAppTests {
             Move(2, 0, O)
         ))
     }
+
+    @Test fun `player X wins`() {
+        val backend = newGameBackend(finishedGame)
+        gameLens(backend(Request(GET, "/game"))).winner shouldEqual X
+    }
 }
 
 class GameTests {
-    // ...
+    private val game = Game()
+
+    @Test fun `players make moves`() {
+        game.move(0, 1).move(2, 0) shouldEqual Game(moves = listOf(
+            Move(0, 1, X),
+            Move(2, 0, O)
+        ))
+    }
+
+    @Test fun `player X wins`() {
+        finishedGame.winner shouldEqual X
+    }
 }
+
+private val finishedGame = Game()
+    .move(0, 0).move(1, 0)
+    .move(0, 1).move(1, 1)
+    .move(0, 2)
 
 private fun Response.expectOK(): Response {
     status shouldEqual OK
