@@ -1,24 +1,20 @@
 <meta charset="UTF-8">
-<body style="font-family: 'Menlo',serif; font-size: 70px;"><p><a href="/move/0/0">_</a>
-            
-        O
-        <a href="/move/0/2">_</a>
-            
+<body style="font-family: 'Menlo',serif; font-size: 70px;"><p>
+        <a href="/move/0/0">_</a>&nbsp;
+        O&nbsp;
+        <a href="/move/0/2">_</a>&nbsp;
         
     </p>
-<p><a href="/move/1/0">_</a>
-            
-        X
-        <a href="/move/1/2">_</a>
-            
+<p>
+        <a href="/move/1/0">_</a>&nbsp;
+        X&nbsp;
+        <a href="/move/1/2">_</a>&nbsp;
         
     </p>
-<p>X
-        <a href="/move/2/1">_</a>
-            
-        <a href="/move/2/2">_</a>
-            
+<p>
+        X&nbsp;
+        <a href="/move/2/1">_</a>&nbsp;
+        <a href="/move/2/2">_</a>&nbsp;
         
     </p>
-
 </body>
