@@ -1,18 +1,18 @@
 <meta charset="UTF-8">
 <body style="font-family: 'Menlo',serif; font-size: 70px;">
-{{~#each rows~}}
+{{#each rows~}}
     <p>
         {{#each this}}
             {{~#if player~}}
                 {{player}}
-            {{~else~}}
+                {{~else~}}
                 <a href="/move/{{x}}/{{y}}">_</a>
             {{~/if~}}
             &nbsp;
         {{/each}}
     </p>
-{{/each}}
-{{~#if winner~}}
+{{~/each}}
+{{#if winner~}}
     {{winner}} wins!! 🥳
 {{~/if~}}
 </body>

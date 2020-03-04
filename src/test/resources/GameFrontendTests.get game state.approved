@@ -1,17 +1,16 @@
 <meta charset="UTF-8">
-<body style="font-family: 'Menlo',serif; font-size: 70px;"><p>
+<body style="font-family: 'Menlo',serif; font-size: 70px;">
+<p>
         <a href="/move/0/0">_</a>&nbsp;
         <a href="/move/0/1">_</a>&nbsp;
         <a href="/move/0/2">_</a>&nbsp;
         
-    </p>
-<p>
+    </p><p>
         <a href="/move/1/0">_</a>&nbsp;
         X&nbsp;
         <a href="/move/1/2">_</a>&nbsp;
         
-    </p>
-<p>
+    </p><p>
         <a href="/move/2/0">_</a>&nbsp;
         <a href="/move/2/1">_</a>&nbsp;
         <a href="/move/2/2">_</a>&nbsp;

@@ -28,12 +28,12 @@ val xLens = Query.int().required("x")
 val yLens = Query.int().required("y")
 
 class CellView(val x: Int, val y: Int, val player: String?)
-class GameView(val rows: List<List<CellView>>, val winner: String?): ViewModel
+class GameView(val rows: List<List<CellView>>, val winner: String?) : ViewModel
 
 private fun Game.toView() = GameView(
     rows = (0..2).map { x ->
         (0..2).map { y ->
-            val player = moves.find { it.x == x && it.y == y}?.player?.name
+            val player = moves.find { it.x == x && it.y == y }?.player?.name
             CellView(x, y, player)
         }
     },
