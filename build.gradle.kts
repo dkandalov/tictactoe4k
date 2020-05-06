@@ -3,11 +3,12 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.4-M1"
 }
 repositories {
     mavenCentral()
-    jcenter()
+    maven ("https://dl.bintray.com/kotlin/kotlin-eap")
+    maven ("https://kotlin.bintray.com/kotlinx")
     ivy {
         setUrl("https://raw.githubusercontent.com/dkandalov/")
         patternLayout {
@@ -19,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
     implementation("org.http4k:http4k-core:3.235.0")
     implementation("org.http4k:http4k-server-apache:3.235.0")
     implementation("org.http4k:http4k-client-okhttp:3.235.0")
@@ -27,11 +29,10 @@ dependencies {
     implementation("org.http4k:http4k-template-handlebars:3.235.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
     implementation("org.slf4j:slf4j-nop:1.7.30") // this is to suppress log warnings from handlebars
-    implementation("dkandalov:kotlin-common-test:0.1.4")
-    implementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    implementation(kotlin("stdlib"))
-    implementation(kotlin("test"))
-    implementation(kotlin("test-junit"))
+    testImplementation("dkandalov:kotlin-common-test:0.1.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit"))
 }
 
 sourceSets["main"].withConvention(KotlinSourceSet::class) {
