@@ -21,12 +21,12 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.http4k:http4k-core:3.235.0")
-    implementation("org.http4k:http4k-server-apache:3.235.0")
-    implementation("org.http4k:http4k-client-okhttp:3.235.0")
-    implementation("org.http4k:http4k-format-jackson:3.235.0")
-    implementation("org.http4k:http4k-testing-approval:3.235.0")
-    implementation("org.http4k:http4k-template-handlebars:3.235.0")
+    implementation("org.http4k:http4k-core:3.245.0")
+    implementation("org.http4k:http4k-server-apache:3.245.0")
+    implementation("org.http4k:http4k-client-okhttp:3.245.0")
+    implementation("org.http4k:http4k-format-jackson:3.245.0")
+    implementation("org.http4k:http4k-testing-approval:3.245.0")
+    implementation("org.http4k:http4k-template-handlebars:3.245.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
     implementation("org.slf4j:slf4j-nop:1.7.30") // this is to suppress log warnings from handlebars
     testImplementation("dkandalov:kotlin-common-test:0.1.4")

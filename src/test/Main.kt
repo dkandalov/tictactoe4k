@@ -17,7 +17,7 @@ fun main() {
     val filters = PrintRequestAndResponse().then(CatchAll())
     filters.then(newGameBackend(Game())).asServer(ApacheServer(port = 1234)).start()
 
-    val gameAppClient = OkHttp().with(SetBaseUriFrom(Uri.of("http://localhost:1234")))
+    val gameAppClient = SetBaseUriFrom(Uri.of("http://localhost:1234")).then(OkHttp())
     newGameFrontend(gameAppClient).asServer(ApacheServer(port = 8080)).start()
 
     println("Started...")

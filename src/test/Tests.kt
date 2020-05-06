@@ -11,7 +11,9 @@ import org.junit.jupiter.api.extension.*
 
 @ExtendWith(ApprovalTest::class)
 class GameFrontendTests {
-    private val frontend = newGameFrontend(newGameBackend(Game().move(1, 1))).with(FollowRedirects())
+    private val frontend = FollowRedirects().then(
+        newGameFrontend(newGameBackend(Game().move(1, 1)))
+    )
 
     @Test fun `get game state`(approver: Approver) {
         val response = frontend(Request(GET, "/")).expectOK()
