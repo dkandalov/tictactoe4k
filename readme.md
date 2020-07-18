@@ -1,13 +1,14 @@
-This project contains source code for the "Server as a function with http4k" talk.
+This project contains source code for the
+[Server as a function with http4k talk](https://www.youtube.com/watch?v=vsueRJCJuLI).
 
-To simplify live-coding all code is located in the `src/test` folder, in particular:
+To simplify live-coding all code is located in the `src/test` folder:
  - `Main.kt` entry point and frontend/backend/domain code
  - `Tests.kt` frontend/backend/domain tests
  - `GameView.hbs` handlebars template for the frontend
  - `resources` approval files for frontend tests
 
 Links and technologies mentioned in the talk:
- - [HTTP4K home page](https://www.http4k.org)
+ - [http4k home page](https://www.http4k.org)
  - ["Your server as a Function" paper](https://monkey.org/~marius/funsrv.pdf) 
  - [Finagle](http://twitter.github.io/finagle)
  - [curl](https://en.wikipedia.org/wiki/CURL)
@@ -21,3 +22,5 @@ Links and technologies mentioned in the talk:
  - [KotlinConf 2018 - Server as a Function in Kotlin](https://www.youtube.com/watch?v=vdxBNh1qx1Q) 
  - [Kotlin slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
  - [I am a teapot http status](https://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol)
+
+See also [Writing Test Driven Apps with http4k talk](https://www.youtube.com/watch?v=p1VTfcQJefk) by Ivan Sanchez and David Denton.
