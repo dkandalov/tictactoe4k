@@ -3,20 +3,13 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.4-M1"
+    kotlin("jvm") version "1.4-M3"
 }
 repositories {
     mavenCentral()
-    maven ("https://dl.bintray.com/kotlin/kotlin-eap")
-    maven ("https://kotlin.bintray.com/kotlinx")
-    ivy {
-        setUrl("https://raw.githubusercontent.com/dkandalov/")
-        patternLayout {
-            artifact("kotlin-common/master/jars/[organisation]-[artifact]-[revision](-[classifier])(.[ext])")
-            artifact("kotlin-common-test/master/jars/[organisation]-[artifact]-[revision](-[classifier])(.[ext])")
-            metadataSources { artifact() }
-        }
-    }
+    maven("https://dl.bintray.com/kotlin/kotlin-eap")
+    maven("https://kotlin.bintray.com/kotlinx")
+    maven("https://dl.bintray.com/dkandalov/maven")
 }
 
 dependencies {
@@ -29,7 +22,7 @@ dependencies {
     implementation("org.http4k:http4k-template-handlebars:3.245.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
     implementation("org.slf4j:slf4j-nop:1.7.30") // this is to suppress log warnings from handlebars
-    testImplementation("dkandalov:kotlin-common-test:0.1.4")
+    testImplementation("datsok:datsok:0.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
