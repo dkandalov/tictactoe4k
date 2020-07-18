@@ -22,9 +22,9 @@ class GameFrontendTests {
 
     @Test fun `players make moves`(approver: Approver) {
         frontend(Request(GET, "/move/0/1")).expectOK()
-        frontend(Request(GET, "/move/2/0")).expectOK()
+        val response = frontend(Request(GET, "/move/2/0")).expectOK()
 
-        approver.assertApproved(frontend(Request(GET, "/")).expectOK())
+        approver.assertApproved(response)
     }
 
     @Test fun `player X wins`(approver: Approver) {

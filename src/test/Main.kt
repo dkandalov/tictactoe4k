@@ -86,14 +86,14 @@ data class Game(val moves: List<Move> = emptyList()) {
 
     private fun findWinner(): Player? {
         return Player.values().find { player ->
-            (0..2).all { moves.contains(Move(it, 0, player)) } ||
-            (0..2).all { moves.contains(Move(it, 1, player)) } ||
-            (0..2).all { moves.contains(Move(it, 2, player)) } ||
-            (0..2).all { moves.contains(Move(0, it, player)) } ||
-            (0..2).all { moves.contains(Move(1, it, player)) } ||
-            (0..2).all { moves.contains(Move(2, it, player)) } ||
-            (0..2).all { moves.contains(Move(it, it, player)) } ||
-            (0..2).all { moves.contains(Move(it, 2 - it, player)) }
+            moves.containsAll((0..2).map { Move(it, 0, player) }) ||
+            moves.containsAll((0..2).map { Move(it, 1, player) }) ||
+            moves.containsAll((0..2).map { Move(it, 2, player) }) ||
+            moves.containsAll((0..2).map { Move(0, it, player) }) ||
+            moves.containsAll((0..2).map { Move(1, it, player) }) ||
+            moves.containsAll((0..2).map { Move(2, it, player) }) ||
+            moves.containsAll((0..2).map { Move(it, it, player) }) ||
+            moves.containsAll((0..2).map { Move(it, 2 - it, player) })
         }
     }
 }
