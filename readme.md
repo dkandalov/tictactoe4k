@@ -1,3 +1,5 @@
+![CI](https://github.com/dkandalov/tictactoe4k/workflows/CI/badge.svg)
+
 This project contains source code for the
 [Server as a function with http4k talk](https://www.youtube.com/watch?v=vsueRJCJuLI).
 
