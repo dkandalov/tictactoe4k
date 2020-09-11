@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
@@ -22,20 +21,22 @@ dependencies {
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
     implementation("org.slf4j:slf4j-nop:1.7.30") // this is to suppress log warnings from handlebars
-
     testImplementation("datsok:datsok:0.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
+    testImplementation(kotlin("test-junit5"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
 }
 
-sourceSets["main"].withConvention(KotlinSourceSet::class) {
+kotlin.sourceSets["main"].apply {
     kotlin.srcDir("src/main")
 }
-sourceSets["test"].withConvention(KotlinSourceSet::class) {
+kotlin.sourceSets["test"].apply {
     kotlin.srcDir("src/test")
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "14"
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
