@@ -34,8 +34,11 @@ kotlin.sourceSets["test"].apply {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "14"
+    kotlinOptions.jvmTarget = "11"
 }
+
+java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 tasks.test {
     useJUnitPlatform()
