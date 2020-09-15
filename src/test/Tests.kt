@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.*
 @ExtendWith(ApprovalTest::class)
 class GameFrontendTests {
     private val frontend = FollowRedirects().then(
-        newGameFrontend(newGameBackend(Game().move(1, 1)))
+        newGameFrontend(newGameBackend(Game().makeMove(1, 1)))
     )
 
     @Test fun `get game state`(approver: Approver) {
@@ -20,7 +20,7 @@ class GameFrontendTests {
         approver.assertApproved(response)
     }
 
-    @Test fun `players make moves`(approver: Approver) {
+    @Test fun `players take turns on each move`(approver: Approver) {
         frontend(Request(GET, "/move/0/1")).expectOK()
         val response = frontend(Request(GET, "/move/2/0")).expectOK()
 
@@ -33,7 +33,7 @@ class GameFrontendTests {
     }
 }
 
-class GameAppTests {
+class GameBackendTests {
     private val backend = newGameBackend(Game())
 
     @Test fun `get game state`() {
@@ -41,7 +41,7 @@ class GameAppTests {
         response.bodyString() shouldEqual "{\"moves\":[],\"winner\":null}"
     }
 
-    @Test fun `players make moves`() {
+    @Test fun `players take turns on each move`() {
         backend(Request(PUT, "/game?x=0&y=1")).expectOK()
         backend(Request(PUT, "/game?x=2&y=0")).expectOK()
 
@@ -61,8 +61,8 @@ class GameAppTests {
 class GameTests {
     private val game = Game()
 
-    @Test fun `players make moves`() {
-        game.move(0, 1).move(2, 0) shouldEqual Game(moves = listOf(
+    @Test fun `players take turns on each move`() {
+        game.makeMove(0, 1).makeMove(2, 0) shouldEqual Game(moves = listOf(
             Move(0, 1, X),
             Move(2, 0, O)
         ))
@@ -74,9 +74,9 @@ class GameTests {
 }
 
 private val finishedGame = Game()
-    .move(0, 0).move(1, 0)
-    .move(0, 1).move(1, 1)
-    .move(0, 2)
+    .makeMove(0, 0).makeMove(1, 0)
+    .makeMove(0, 1).makeMove(1, 1)
+    .makeMove(0, 2)
 
 private fun Response.expectOK(): Response {
     status shouldEqual OK

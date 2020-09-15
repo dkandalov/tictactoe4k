@@ -20,7 +20,7 @@ dependencies {
     implementation("org.http4k:http4k-format-jackson")
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
-    implementation("org.slf4j:slf4j-nop:1.7.30") // this is to suppress log warnings from handlebars
+    implementation("org.slf4j:slf4j-nop:1.7.30") // Suppress log warnings from handlebars
     testImplementation("datsok:datsok:0.2")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")

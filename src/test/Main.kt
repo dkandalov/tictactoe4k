@@ -17,8 +17,8 @@ fun main() {
     val filters = PrintRequestAndResponse().then(CatchAll())
     filters.then(newGameBackend(Game())).asServer(ApacheServer(port = 1234)).start()
 
-    val gameAppClient = SetBaseUriFrom(Uri.of("http://localhost:1234")).then(OkHttp())
-    newGameFrontend(gameAppClient).asServer(ApacheServer(port = 8080)).start()
+    val backendClient = SetBaseUriFrom(Uri.of("http://localhost:1234")).then(OkHttp())
+    newGameFrontend(backendClient).asServer(ApacheServer(port = 8080)).start()
 
     println("Started...")
 }
@@ -40,17 +40,17 @@ private fun Game.toView() = GameView(
     winner = winner?.name
 )
 
-fun newGameFrontend(gameApp: HttpHandler): HttpHandler {
-    val renderer = HandlebarsTemplates().HotReload("src/test")
+fun newGameFrontend(backend: HttpHandler): HttpHandler {
+    val htmlRenderer = HandlebarsTemplates().HotReload("src/test")
     return routes(
         "/" bind GET to {
-            val game = gameLens(gameApp(Request(GET, "/game")))
-            Response(OK).body(renderer(game.toView()))
+            val game = gameLens(backend(Request(GET, "/game")))
+            Response(OK).body(htmlRenderer(game.toView()))
         },
         "/move/{x}/{y}" bind GET to { request ->
             val x = request.path("x")
             val y = request.path("y")
-            gameApp(Request(PUT, "/game?x=$x&y=$y"))
+            backend(Request(PUT, "/game?x=$x&y=$y"))
             Response(SEE_OTHER).header("Location", "/")
         }
     )
@@ -65,7 +65,7 @@ fun newGameBackend(initialGame: Game): HttpHandler {
         "/game" bind PUT to { request ->
             val x = xLens(request)
             val y = yLens(request)
-            game = game.move(x, y)
+            game = game.makeMove(x, y)
             Response(OK)
         }
     )
@@ -78,7 +78,7 @@ data class Move(val x: Int, val y: Int, val player: Player)
 data class Game(val moves: List<Move> = emptyList()) {
     val winner: Player? = findWinner()
 
-    fun move(x: Int, y: Int): Game {
+    fun makeMove(x: Int, y: Int): Game {
         val player = if (moves.lastOrNull()?.player == X) O else X
         val newMove = Move(x, y, player)
         return copy(moves = moves + newMove)
