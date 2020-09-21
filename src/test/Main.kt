@@ -50,7 +50,7 @@ fun newGameFrontend(backend: HttpHandler): HttpHandler {
         "/move/{x}/{y}" bind GET to { request ->
             val x = request.path("x")
             val y = request.path("y")
-            backend(Request(PUT, "/game?x=$x&y=$y"))
+            backend(Request(POST, "/game?x=$x&y=$y"))
             Response(SEE_OTHER).header("Location", "/")
         }
     )
@@ -62,7 +62,7 @@ fun newGameBackend(initialGame: Game): HttpHandler {
         "/game" bind GET to {
             Response(OK).with(gameLens of game)
         },
-        "/game" bind PUT to { request ->
+        "/game" bind POST to { request ->
             val x = xLens(request)
             val y = yLens(request)
             game = game.makeMove(x, y)

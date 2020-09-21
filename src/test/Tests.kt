@@ -1,4 +1,3 @@
-
 import Player.*
 import datsok.*
 import org.http4k.core.*
@@ -42,8 +41,8 @@ class GameBackendTests {
     }
 
     @Test fun `players take turns on each move`() {
-        backend(Request(PUT, "/game?x=0&y=1")).expectOK()
-        backend(Request(PUT, "/game?x=2&y=0")).expectOK()
+        backend(Request(POST, "/game?x=0&y=1")).expectOK()
+        backend(Request(POST, "/game?x=2&y=0")).expectOK()
 
         val response = backend(Request(GET, "/game")).expectOK()
         gameLens(response) shouldEqual Game(moves = listOf(
