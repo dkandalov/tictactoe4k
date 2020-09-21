@@ -15,10 +15,14 @@ import org.http4k.template.*
 
 fun main() {
     val filters = PrintRequestAndResponse().then(CatchAll())
-    filters.then(newGameBackend(Game())).asServer(ApacheServer(port = 1234)).start()
+    filters.then(newGameBackend(Game()))
+        .asServer(ApacheServer(port = 1234))
+        .start()
 
     val backendClient = SetBaseUriFrom(Uri.of("http://localhost:1234")).then(OkHttp())
-    newGameFrontend(backendClient).asServer(ApacheServer(port = 8080)).start()
+    newGameFrontend(backendClient)
+        .asServer(ApacheServer(port = 8080))
+        .start()
 
     println("Started...")
 }
