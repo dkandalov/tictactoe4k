@@ -22,6 +22,7 @@ Links and technologies mentioned in the talk:
  - [Approval testing](http://www.oneeyedmen.com/tdd-v-testing-part3.html)
  - [Approval testing plugin for IntelliJ](https://plugins.jetbrains.com/plugin/9424-okey-doke-support)
  - [KotlinConf 2018 - Server as a Function in Kotlin](https://www.youtube.com/watch?v=vdxBNh1qx1Q) 
+ - [Writing Test Driven Apps with http4k](https://www.youtube.com/watch?v=p1VTfcQJefk) 
  - [Kotlin slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
  - [I am a teapot http status](https://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol)
 
