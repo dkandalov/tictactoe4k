@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.4.0"
+    kotlin("jvm") version "1.4.10"
 }
 repositories {
     mavenCentral()
@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(platform("org.http4k:http4k-bom:3.260.0"))
+    implementation(platform("org.http4k:http4k-bom:3.276.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
@@ -21,9 +21,9 @@ dependencies {
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
     implementation("org.slf4j:slf4j-nop:1.7.30") // Suppress log warnings from handlebars
-    testImplementation("datsok:datsok:0.2")
+    testImplementation("datsok:datsok:0.4")
     testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 
 kotlin.sourceSets["main"].apply {
