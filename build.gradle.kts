@@ -2,7 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.4.0"
+    kotlin("jvm") version "1.4.10"
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 repositories {
     mavenCentral()
