@@ -45,10 +45,12 @@ class GameBackendTests {
         backend(Request(POST, "/game?x=2&y=0")).expectOK()
 
         val response = backend(Request(GET, "/game")).expectOK()
-        gameLens(response) shouldEqual Game(moves = listOf(
-            Move(0, 1, X),
-            Move(2, 0, O)
-        ))
+        gameLens(response) shouldEqual Game(
+            moves = listOf(
+                Move(0, 1, X),
+                Move(2, 0, O)
+            )
+        )
     }
 
     @Test fun `player X wins`() {
@@ -61,10 +63,12 @@ class GameTests {
     private val game = Game()
 
     @Test fun `players take turns on each move`() {
-        game.makeMove(0, 1).makeMove(2, 0) shouldEqual Game(moves = listOf(
-            Move(0, 1, X),
-            Move(2, 0, O)
-        ))
+        game.makeMove(0, 1).makeMove(2, 0) shouldEqual Game(
+            moves = listOf(
+                Move(0, 1, X),
+                Move(2, 0, O)
+            )
+        )
     }
 
     @Test fun `player X wins`() {

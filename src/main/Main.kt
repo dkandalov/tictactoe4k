@@ -24,7 +24,7 @@ fun main() {
         .asServer(ApacheServer(port = 8080))
         .start()
 
-    println("Started...")
+    println("Started on http://localhost:8080")
 }
 
 val gameLens: BiDiBodyLens<Game> = Body.auto<Game>().toLens()
@@ -45,7 +45,7 @@ private fun Game.toView() = GameView(
 )
 
 fun newGameFrontend(backend: HttpHandler): HttpHandler {
-    val htmlRenderer = HandlebarsTemplates().HotReload("src/test")
+    val htmlRenderer = HandlebarsTemplates().CachingClasspath()
     return routes(
         "/" bind GET to {
             val game = gameLens(backend(Request(GET, "/game")))
