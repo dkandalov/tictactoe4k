@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
 }
 repositories {
     mavenCentral()
@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(platform("org.http4k:http4k-bom:3.276.0"))
+    implementation(platform("org.http4k:http4k-bom:3.285.1"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
