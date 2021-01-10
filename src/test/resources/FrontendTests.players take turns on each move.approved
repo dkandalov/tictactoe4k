@@ -2,7 +2,7 @@
 <body style="font-family: 'Menlo',serif; font-size: 70px;">
 <p>
         <a href="/move/0/0">_</a>&nbsp;
-        O&nbsp;
+        X&nbsp;
         <a href="/move/0/2">_</a>&nbsp;
         
     </p><p>
@@ -11,7 +11,7 @@
         <a href="/move/1/2">_</a>&nbsp;
         
     </p><p>
-        X&nbsp;
+        O&nbsp;
         <a href="/move/2/1">_</a>&nbsp;
         <a href="/move/2/2">_</a>&nbsp;
         
