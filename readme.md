@@ -3,7 +3,7 @@
 This project contains source code for the
 [Server as a function with http4k talk](https://www.youtube.com/watch?v=vsueRJCJuLI).
 
-To simplify live-coding all code is located in the `src/test` folder:
+For simplicity all the code is located in the `src/test` folder:
  - `Main.kt` entry point and frontend/backend/domain code
  - `Tests.kt` frontend/backend/domain tests
  - `GameView.hbs` handlebars template for the frontend
@@ -11,6 +11,7 @@ To simplify live-coding all code is located in the `src/test` folder:
 
 Links and technologies mentioned in the talk:
  - [http4k home page](https://www.http4k.org)
+ - [http4k v4: 17 platforms and counting...](https://www.http4k.org/blog/http4k_v4)
  - ["Your server as a Function" paper](https://monkey.org/~marius/funsrv.pdf) 
  - [Finagle](http://twitter.github.io/finagle)
  - [curl](https://en.wikipedia.org/wiki/CURL)
