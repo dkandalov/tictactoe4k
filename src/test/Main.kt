@@ -13,6 +13,7 @@ import org.http4k.lens.*
 import org.http4k.routing.*
 import org.http4k.server.*
 import org.http4k.template.*
+import java.util.concurrent.atomic.*
 
 fun main() {
     newBackend(Game()).asServer(ApacheServer(port = 1234)).start()
@@ -22,10 +23,6 @@ fun main() {
 
     println("Started on http://localhost:8080")
 }
-
-val gameLens = Body.auto<Game>().toLens()
-val xLens = Query.int().required("x")
-val yLens = Query.int().required("y")
 
 fun newFrontend(backend: HttpHandler): HttpHandler {
     val htmlRenderer = HandlebarsTemplates().HotReload("src/test")
@@ -40,8 +37,12 @@ fun newFrontend(backend: HttpHandler): HttpHandler {
             backend(Request(POST, "/game?x=$x&y=$y"))
             Response(SEE_OTHER).header("Location", "/")
         }
-    ).withFilter(PrintRequestAndResponse().then(CatchAll()))
+    )
 }
+
+class GameView(val rows: List<List<CellView>>, val winner: String?) : ViewModel
+
+class CellView(val x: Int, val y: Int, val player: String?)
 
 private fun Game.toGameView() = GameView(
     rows = (0..2).map { x ->
@@ -53,28 +54,24 @@ private fun Game.toGameView() = GameView(
     winner = winner?.name
 )
 
-class GameView(
-    val rows: List<List<CellView>>,
-    val winner: String?
-): ViewModel
-
-class CellView(val x: Int, val y: Int, val player: String?)
-
+val gameLens = Body.auto<Game>().toLens()
+val xLens = Query.int().required("x")
+val yLens = Query.int().required("y")
 
 fun newBackend(initialGame: Game): HttpHandler {
-    var game = initialGame
+    val game = AtomicReference(initialGame)
     return routes(
         "/game" bind GET to {
-            gameLens.inject(game, Response(OK))
+            gameLens.inject(game.get(), Response(OK))
         },
         "/game" bind POST to { request ->
             val x = xLens.extract(request)
             val y = yLens.extract(request)
 
-            game = game.makeMove(x, y)
+            game.updateAndGet { it.makeMove(x, y) }
 
             Response(OK)
-        },
+        }
     ).withFilter(PrintRequestAndResponse().then(CatchAll()))
 }
 
@@ -83,12 +80,12 @@ data class Game(val moves: List<Move> = emptyList()) {
 
     fun makeMove(x: Int, y: Int): Game {
         if (winner != null) return this
-        val player = if (moves.lastOrNull()?.player != X) X else O
-        return copy(moves = moves + Move(x, y, player))
+        val nextPlayer = if (moves.lastOrNull()?.player != X) X else O
+        return copy(moves = moves + Move(x, y, nextPlayer))
     }
 
-    private fun findWinner(): Player? {
-        return enumValues<Player>().find { player ->
+    private fun findWinner(): Player? =
+        enumValues<Player>().find { player ->
             moves.containsAll((0..2).map { Move(it, 0, player) }) ||
             moves.containsAll((0..2).map { Move(it, 1, player) }) ||
             moves.containsAll((0..2).map { Move(it, 2, player) }) ||
@@ -98,7 +95,6 @@ data class Game(val moves: List<Move> = emptyList()) {
             moves.containsAll((0..2).map { Move(it, it, player) }) ||
             moves.containsAll((0..2).map { Move(it, 2 - it, player) })
         }
-    }
 }
 
 data class Move(val x: Int, val y: Int, val player: Player)

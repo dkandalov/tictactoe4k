@@ -1,3 +1,4 @@
+
 import datsok.*
 import org.http4k.core.*
 import org.http4k.core.Method.*
@@ -13,7 +14,7 @@ class FrontendTests {
         newFrontend(newBackend(Game()))
     )
 
-    @Test fun `get game state`(approver: Approver) {
+    @Test fun `state of an empty game`(approver: Approver) {
         val response = frontend(Request(GET, "/")).expectOK()
         approver.assertApproved(response)
     }
@@ -22,7 +23,6 @@ class FrontendTests {
         frontend(Request(GET, "/move/0/1")).expectOK()
         frontend(Request(GET, "/move/2/0")).expectOK()
         val response = frontend(Request(GET, "/move/1/1")).expectOK()
-
         approver.assertApproved(response)
     }
 
@@ -36,24 +36,22 @@ class FrontendTests {
 class BackendTests {
     private val backend = newBackend(Game())
 
-    @Test fun `get game state`() {
+    @Test fun `state of an empty game`() {
         val response = backend(Request(GET, "/game")).expectOK()
         response.bodyString() shouldEqual "{\"moves\":[],\"winner\":null}"
     }
 
-    @Test fun `players take turn on each move`() {
+    @Test fun `players take turns on each move`() {
         backend(Request(POST, "/game?x=0&y=1")).expectOK()
         backend(Request(POST, "/game?x=2&y=0")).expectOK()
         backend(Request(POST, "/game?x=1&y=1")).expectOK()
 
         val response = backend(Request(GET, "/game")).expectOK()
-        gameLens.extract(response) shouldEqual Game(
-            moves = listOf(
-                Move(0, 1, Player.X),
-                Move(2, 0, Player.O),
-                Move(1, 1, Player.X),
-            )
-        )
+        gameLens.extract(response) shouldEqual Game(moves = listOf(
+            Move(0, 1, Player.X),
+            Move(2, 0, Player.O),
+            Move(1, 1, Player.X),
+        ))
     }
 
     @Test fun `player X wins`() {
@@ -63,9 +61,7 @@ class BackendTests {
 }
 
 class GameTests {
-    @Test fun `players take turn on each move`() {
-        // ...
-    }
+    // ...
 }
 
 private val finishedGame = Game()
