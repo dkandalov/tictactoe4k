@@ -27,7 +27,7 @@ Links and technologies mentioned in the talk:
  - [Approval testing talk](https://www.youtube.com/watch?v=0ZVKcFsEp-4) by Emily Bache  
  - [Approval testing blog](http://www.oneeyedmen.com/tdd-v-testing-part3.html) by Duncan McGregor
  - [Approval testing plugin for IntelliJ](https://plugins.jetbrains.com/plugin/9424-okey-doke-support)
- - [KotlinConf 2018 - Server as a Function in Kotlin](https://www.youtube.com/watch?v=vdxBNh1qx1Q) 
+ - [KotlinConf 2018 - Server as a Function in Kotlin](https://www.youtube.com/watch?v=vdxBNh1qx1Q) by Ivan Sanchez and David Denton 
  - [Writing Test Driven Apps with http4k](https://www.youtube.com/watch?v=p1VTfcQJefk) by Ivan Sanchez and David Denton 
  - [Coroutine support in http4k](https://github.com/http4k/http4k/issues/94#issuecomment-774505850)
  - [Kotlin slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
