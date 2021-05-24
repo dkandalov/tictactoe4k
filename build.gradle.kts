@@ -1,19 +1,22 @@
+import org.gradle.api.JavaVersion.*
 import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.5.0"
 }
 repositories {
     mavenCentral()
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
     maven("https://kotlin.bintray.com/kotlinx")
-    maven("https://dl.bintray.com/dkandalov/maven")
+    ivy {
+        artifactPattern("https://raw.githubusercontent.com/dkandalov/[module]/master/jars/[artifact]-[revision](.[ext])")
+    }
 }
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(platform("org.http4k:http4k-bom:4.3.0.0"))
+    implementation(platform("org.http4k:http4k-bom:4.9.1.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
@@ -21,9 +24,9 @@ dependencies {
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
     implementation("org.slf4j:slf4j-nop:1.7.30") // Suppress log warnings from handlebars
-    testImplementation("datsok:datsok:0.4")
+    testImplementation("datsok:datsok:0.5")
     testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 }
 
 kotlin.sourceSets["main"].apply {
@@ -37,8 +40,8 @@ tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions.jvmTarget = "11"
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = VERSION_11
+java.targetCompatibility = VERSION_11
 
 tasks.test {
     useJUnitPlatform()
