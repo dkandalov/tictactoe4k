@@ -28,21 +28,31 @@ fun newFrontend(backend: HttpHandler): HttpHandler {
     val htmlRenderer = HandlebarsTemplates().HotReload("src/test")
     return routes(
         "/" bind GET to {
-            val game = gameLens(backend(Request(GET, "/game")))
+            val response = backend(Request(GET, "/game"))
+            val game = gameLens(response)
             Response(OK).body(htmlRenderer(game.toGameView()))
         },
         "/move/{x}/{y}" bind GET to { request ->
             val x = request.path("x")
             val y = request.path("y")
+
             backend(Request(POST, "/game?x=$x&y=$y"))
+
             Response(SEE_OTHER).header("Location", "/")
         }
     )
 }
 
-class GameView(val rows: List<List<CellView>>, val winner: String?) : ViewModel
+class GameView(
+    val rows: List<List<CellView>>,
+    val winner: String?
+) : ViewModel
 
-class CellView(val x: Int, val y: Int, val player: String?)
+class CellView(
+    val x: Int,
+    val y: Int,
+    val player: String?
+)
 
 private fun Game.toGameView() = GameView(
     rows = (0..2).map { x ->

@@ -1,4 +1,5 @@
 
+import Player.*
 import datsok.*
 import org.http4k.core.*
 import org.http4k.core.Method.*
@@ -48,15 +49,15 @@ class BackendTests {
 
         val response = backend(Request(GET, "/game")).expectOK()
         gameLens.extract(response) shouldEqual Game(moves = listOf(
-            Move(0, 1, Player.X),
-            Move(2, 0, Player.O),
-            Move(1, 1, Player.X),
+            Move(0, 1, X),
+            Move(2, 0, O),
+            Move(1, 1, X),
         ))
     }
 
     @Test fun `player X wins`() {
         val backend = newBackend(finishedGame)
-        gameLens(backend(Request(GET, "/game"))).winner shouldEqual Player.X
+        gameLens(backend(Request(GET, "/game"))).winner shouldEqual X
     }
 }
 
