@@ -8,7 +8,7 @@ import org.http4k.core.Status.Companion.SEE_OTHER
 import org.http4k.filter.ClientFilters.SetBaseUriFrom
 import org.http4k.filter.DebuggingFilters.PrintRequestAndResponse
 import org.http4k.filter.ServerFilters.CatchAll
-import org.http4k.format.Jackson.auto
+import org.http4k.format.Jackson.autoBody
 import org.http4k.lens.*
 import org.http4k.routing.*
 import org.http4k.server.*
@@ -64,7 +64,7 @@ private fun Game.toGameView() = GameView(
     winner = winner?.name
 )
 
-val gameLens = Body.auto<Game>().toLens()
+val gameLens = autoBody<Game>().toLens()
 val xLens = Query.int().required("x")
 val yLens = Query.int().required("y")
 
