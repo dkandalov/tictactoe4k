@@ -8,7 +8,7 @@ import org.http4k.core.Status.Companion.SEE_OTHER
 import org.http4k.filter.ClientFilters.SetBaseUriFrom
 import org.http4k.filter.DebuggingFilters.PrintRequestAndResponse
 import org.http4k.filter.ServerFilters.CatchAll
-import org.http4k.format.Jackson.autoBody
+import org.http4k.format.Moshi.autoBody
 import org.http4k.lens.*
 import org.http4k.routing.*
 import org.http4k.server.*

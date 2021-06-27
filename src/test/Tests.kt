@@ -39,7 +39,7 @@ class BackendTests {
 
     @Test fun `state of an empty game`() {
         val response = backend(Request(GET, "/game")).expectOK()
-        response.bodyString() shouldEqual "{\"moves\":[],\"winner\":null}"
+        response.bodyString() shouldEqual "{\"moves\":[]}"
     }
 
     @Test fun `players take turns on each move`() {

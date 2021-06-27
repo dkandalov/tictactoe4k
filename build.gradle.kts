@@ -19,7 +19,7 @@ dependencies {
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
-    implementation("org.http4k:http4k-format-jackson")
+    implementation("org.http4k:http4k-format-moshi")
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
     implementation("org.slf4j:slf4j-nop:1.7.30") // Suppress log warnings from handlebars
