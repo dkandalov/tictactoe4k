@@ -3,11 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.5.20"
 }
 repositories {
     mavenCentral()
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
     maven("https://kotlin.bintray.com/kotlinx")
     ivy {
         artifactPattern("https://raw.githubusercontent.com/dkandalov/[module]/master/jars/[artifact]-[revision](.[ext])")
@@ -16,7 +15,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(platform("org.http4k:http4k-bom:4.9.1.0"))
+    implementation(platform("org.http4k:http4k-bom:4.9.8.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
