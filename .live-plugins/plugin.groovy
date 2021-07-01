@@ -22,7 +22,7 @@ static pasteImportAuto(Project project) {
     def document = currentDocumentIn(project)
     def editor = currentEditorIn(project)
     runDocumentWriteAction(project, document) {
-        document.insertString(editor.caretModel.offset, "import org.http4k.format.Jackson.auto")
+        document.insertString(editor.caretModel.offset, "import org.http4k.format.Moshi.autoBody")
     }
 }
 
