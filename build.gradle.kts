@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation(platform("org.http4k:http4k-bom:4.9.8.0"))
+    implementation(platform("org.http4k:http4k-bom:4.12.1.0"))
     implementation("org.http4k:http4k-core")
     implementation("org.http4k:http4k-server-apache")
     implementation("org.http4k:http4k-client-okhttp")
