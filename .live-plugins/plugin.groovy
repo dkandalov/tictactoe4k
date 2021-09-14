@@ -1,4 +1,12 @@
+import com.intellij.execution.filters.ConsoleInputFilterProvider
+import com.intellij.execution.filters.InputFilter
+import com.intellij.execution.ui.ConsoleViewContentType
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.extensions.Extensions
+import com.intellij.openapi.extensions.LoadingOrder
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.Pair
+import org.jetbrains.annotations.NotNull
 
 import static liveplugin.PluginUtil.*
 
@@ -115,4 +123,29 @@ private fun Game.toGameView() = GameView(
     }
 }
 
-if (!isIdeStartup) show("Reloaded tictactoe4k popup")
+static registerConsoleFilter(Disposable disposable, InputFilter inputFilter) {
+    def inputFilterProvider = new ConsoleInputFilterProvider() {
+        @Override InputFilter[] getDefaultFilters(@NotNull Project project) {
+            [inputFilter]
+        }
+    }
+    def extensionPoint = Extensions.rootArea.getExtensionPoint(ConsoleInputFilterProvider.INPUT_FILTER_PROVIDERS)
+    extensionPoint.registerExtension(inputFilterProvider, LoadingOrder.FIRST, disposable)
+    inputFilterProvider
+}
+
+registerConsoleFilter(pluginDisposable, new InputFilter() {
+    @Override List<Pair<String, ConsoleViewContentType>> applyFilter(String consoleText, ConsoleViewContentType contentType) {
+        if (consoleText.startsWith("/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk")) {
+            [new Pair("", ConsoleViewContentType.SYSTEM_OUTPUT)]
+        } else if (consoleText.startsWith("/Users/dima/Library/Java/JavaVirtualMachines/openjdk-15.0.2")) {
+            [new Pair("", ConsoleViewContentType.SYSTEM_OUTPUT)]
+        } else if (consoleText.contains("Process finished with exit code")) {
+            [new Pair("", ConsoleViewContentType.SYSTEM_OUTPUT)]
+        } else {
+            null
+        }
+    }
+})
+
+if (!isIdeStartup) show("Reloaded tictactoe4k actions")
