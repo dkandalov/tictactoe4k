@@ -43,20 +43,20 @@ static pasteGameCode(Project project) {
 
     fun makeMove(x: Int, y: Int): Game {
         if (winner != null) return this
-        val nextPlayer = if (moves.lastOrNull()?.player != Player.X) Player.X else Player.O
+        val nextPlayer = if (moves.lastOrNull()?.player == Player.X) Player.O else Player.X
         return copy(moves = moves + Move(x, y, nextPlayer))
     }
 
     private fun findWinner(): Player? =
         enumValues<Player>().find { player ->
-            moves.containsAll((0..2).map { Move(it, 0, player) }) ||
-            moves.containsAll((0..2).map { Move(it, 1, player) }) ||
-            moves.containsAll((0..2).map { Move(it, 2, player) }) ||
-            moves.containsAll((0..2).map { Move(0, it, player) }) ||
-            moves.containsAll((0..2).map { Move(1, it, player) }) ||
-            moves.containsAll((0..2).map { Move(2, it, player) }) ||
-            moves.containsAll((0..2).map { Move(it, it, player) }) ||
-            moves.containsAll((0..2).map { Move(it, 2 - it, player) })
+            moves.containsAll((0..2).map { Move(x = it, y = 0, player) }) ||
+            moves.containsAll((0..2).map { Move(x = it, y = 1, player) }) ||
+            moves.containsAll((0..2).map { Move(x = it, y = 2, player) }) ||
+            moves.containsAll((0..2).map { Move(x = 0, y = it, player) }) ||
+            moves.containsAll((0..2).map { Move(x = 1, y = it, player) }) ||
+            moves.containsAll((0..2).map { Move(x = 2, y = it, player) }) ||
+            moves.containsAll((0..2).map { Move(x = it, y = it, player) }) ||
+            moves.containsAll((0..2).map { Move(x = it, y = 2 - it, player) })
         }\n"""
         )
     }
