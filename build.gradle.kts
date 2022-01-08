@@ -3,11 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
 }
 repositories {
     mavenCentral()
-    maven("https://kotlin.bintray.com/kotlinx")
     ivy {
         artifactPattern("https://raw.githubusercontent.com/dkandalov/[module]/master/jars/[artifact]-[revision](.[ext])")
     }
@@ -22,10 +21,10 @@ dependencies {
     implementation("org.http4k:http4k-format-moshi")
     implementation("org.http4k:http4k-testing-approval")
     implementation("org.http4k:http4k-template-handlebars")
-    implementation("org.slf4j:slf4j-nop:1.7.30") // Suppress log warnings from handlebars
+    implementation("org.slf4j:slf4j-nop:1.7.32") // Suppress log warnings from handlebars
     testImplementation("datsok:datsok:0.5")
     testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }
 
 kotlin.sourceSets["main"].apply {
