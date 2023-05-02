@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.*
 
 plugins {
     java
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.8.20"
 }
 repositories {
     mavenCentral()
